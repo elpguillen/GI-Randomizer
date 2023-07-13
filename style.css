@@ -108,6 +108,10 @@ button {
   margin: 0 1rem;
 }
 
+section {
+  margin: 50px 10px;
+}
+
 /* header */
 
 .primary-header {
@@ -169,9 +173,25 @@ img {
   background-color: white;
 }
 
+/*.characters-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}*/
+
+.characters-grid {
+  display: grid;
+  /*grid-template-columns: repeat(4, var(--size-card-min-width));*/
+  grid-template-columns: repeat(auto-fill, minmax(var(--size-card-min-width), 1fr));
+  gap: 0.1rem;
+  justify-content: center;
+}
+
 .character-card {
   display: block;
   border-radius: var(--size-card-border-radius);
+  padding: 0.5rem;
 }
 
 .character-image-holder {
