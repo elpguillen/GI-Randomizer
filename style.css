@@ -18,6 +18,10 @@
   --size-3xlarge: 8rem;
 
   --size-card-min-width: var(--size-large-3);
+  --size-card-max-width: var(--size-3xlarge);
+  --size-card-small: var(--size-large-3);
+  --size-card-large: var(--size-3xlarge);
+
   --size-card-border-radius: 10%;
 }
 
@@ -134,7 +138,7 @@ button {
 }
 
 img {
-  width: 5rem;
+  width: var(--size-card-small);
   display: block;
   text-align: center;
   border: 1px solid blue;
@@ -171,13 +175,13 @@ img {
 }
 
 .character-image-holder {
-  width: 5rem;
-  height: 5rem;
+  width: var(--size-card-small);
+  height: var(--size-card-small);
   border-radius: var(--size-card-border-radius) var(--size-card-border-radius);
 }
 
 .character-name-holder {
-  width: 5rem;
+  width: var(--size-card-small);
   padding: .5rem .5rem;
   text-align: center;
   font-size: small;
@@ -185,6 +189,27 @@ img {
   overflow: hidden;
   text-overflow: ellipsis;
   border: 1px solid red;
+}
+
+@media (min-width: 50em) {
+
+  .team-grid {
+    grid-template-columns: repeat(4, var(--size-card-max-width));
+  }
+
+  img {
+    width: var(--size-card-large);
+  }
+
+  .character-image-holder {
+    width: var(--size-card-large);
+    height: var(--size-card-large);
+  }
+
+  .character-name-holder {
+    width: var(--size-card-large);
+    font-size: large;
+  }
 }
 
 /*@media (min-width: 50em) {
