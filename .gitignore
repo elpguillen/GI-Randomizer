@@ -24,6 +24,9 @@ node_modules/
 # ignore jekyll build directory
 /_site
 
+# ignore icons directory
+/icons
+
 # ignore OS generated files
 ehthumbs.db
 Thumbs.db
