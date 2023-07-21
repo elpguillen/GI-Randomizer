@@ -145,12 +145,11 @@ img {
   width: var(--size-card-small);
   display: block;
   text-align: center;
-  border: 1px solid blue;
 }
 
 .teams-container {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   flex-wrap: wrap;
   margin-top: 2rem;
@@ -161,8 +160,12 @@ img {
   display: grid;
   grid-template-columns: repeat(4, var(--size-card-min-width));
   justify-items: center;
-  padding: 1rem;
+  gap: 1rem;
   border: 1px solid gold;
+}
+
+.team-image-holder {
+  background-color: #86898D;
 }
 
 .teams-grid-divider {
@@ -195,9 +198,13 @@ img {
 }
 
 .character-image-holder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: var(--size-card-small);
   height: var(--size-card-small);
   border-radius: var(--size-card-border-radius) var(--size-card-border-radius);
+  border: 1px solid blue;
 }
 
 .character-name-holder {
@@ -209,6 +216,11 @@ img {
   overflow: hidden;
   text-overflow: ellipsis;
   border: 1px solid red;
+}
+
+.character-chosen {
+  width: 40%;
+  height: 40%;
 }
 
 @media (min-width: 50em) {
