@@ -109,6 +109,15 @@ function formatCharacterName(characterName) {
             .join("-");
 }
 
+function addRandomizeButtonEventListener() {
+    const randomizeButton = document.querySelector("#randomize-button");
+
+    randomizeButton.addEventListener("click", function () {
+        randomizeTeams();
+        addTeams(4, firstTeam, secondTeam);
+    });
+}
+
 // Colors used in site
 const fiveStarBackgroundColor = "#AB6E28";
 const fourStarBackgroundColor = "#7465A3";
@@ -174,5 +183,6 @@ for (let characterIndex = 0; characterIndex < characterCards.length; characterIn
     }
 }
 
-randomizeTeams();
-addTeams(4, firstTeam, secondTeam);
+addRandomizeButtonEventListener();
+//randomizeTeams();
+//addTeams(4, firstTeam, secondTeam);
