@@ -46,8 +46,8 @@ function randomizeTeams() {
 
 /**
  * 
- * @param {Number} teamSize the number of characters in the team
- * @param {String[]} characters an array of character names
+ * @param {number} teamSize the number of characters in the team
+ * @param {string[]} characters an array of character names
  * @returns A team of characters (array of names), empty if invalid paramaters
  */
 function createTeam(teamSize, characters) {
@@ -75,9 +75,9 @@ function createTeam(teamSize, characters) {
 
 /**
  * Adds teams to corresponding team container.
- * @param {*} teamSize The size of each team
- * @param {*} teamOne An array containing character names of the first team
- * @param {*} teamTwo An array containing character names of the second team
+ * @param {number} teamSize The size of each team
+ * @param {string[]} teamOne An array containing character names of the first team
+ * @param {string[]} teamTwo An array containing character names of the second team
  */
 function addTeams(teamSize, teamOne, teamTwo) {
     let teamGrids = document.getElementsByClassName("team-grid");
@@ -91,16 +91,34 @@ function addTeams(teamSize, teamOne, teamTwo) {
         let teamOneImage = charactersTeamOne[index].querySelector('img');
         let teamTwoImage = charactersTeamTwo[index].querySelector('img');
 
-        teamOneImage.src = `icons/${formatCharacterName(teamOne[index])}.png`;
-        teamTwoImage.src = `icons/${formatCharacterName(teamTwo[index])}.png`;
+        let teamOneNameHolder = charactersTeamOne[index].querySelector('.character-name-holder');
+        let teamTwoNameHolder = charactersTeamTwo[index].querySelector('.character-name-holder');
+
+        let teamOneChar = teamOne[index];
+        let teamTwoChar = teamTwo[index];
+
+        let teamOneCharRarity = characters[teamOneChar]["rarity"];
+        let teamTwoCharRarity = characters[teamTwoChar]["rarity"];
+
+        teamOneImage.classList.remove("default-image");
+        teamTwoImage.classList.remove("default-image");
+
+        teamOneNameHolder.textContent = revertToLowerAndHyphenate(teamOneChar);
+        teamTwoNameHolder.textContent = revertToLowerAndHyphenate(teamTwoChar);
+
+        teamOneImage.src = `icons/${toLowerAndHyphenate(teamOne[index])}.png`;
+        teamTwoImage.src = `icons/${toLowerAndHyphenate(teamTwo[index])}.png`;
+
+        changeCharBackground(teamOneCharRarity, teamOneImage);
+        changeCharBackground(teamTwoCharRarity, teamTwoImage);
     }
 }
 
 /**
- * @param {String} characterName The character name
- * @returns Character name with spaces replaced with hyphens  
+ * @param {string} characterName The character name
+ * @returns Character name in lower case with spaces replaced with hyphens  
  */
-function formatCharacterName(characterName) {
+function toLowerAndHyphenate(characterName) {
     if (typeof characterName !== "string")
         return "";
 
@@ -109,6 +127,30 @@ function formatCharacterName(characterName) {
             .join("-");
 }
 
+/**
+ * Reverts the changes that the function 'toLowerAndHyphenate' made:
+ *      1. Uses space as delimiter instead of hyphen
+ *      2. Capitalizes first letter in each word
+ * @param {string} characterName The character name
+ * @returns Space delimited string with first character in word capitalized
+ */
+function revertToLowerAndHyphenate(characterName) {
+    if (typeof characterName !== "string")
+        return "";
+
+    let characterNameArray = characterName.split("-");
+
+    for (const index in characterNameArray) {
+        let name = characterNameArray[index];
+        characterNameArray[index] = name.charAt(0).toUpperCase() + name.slice(1);
+    }
+    
+    return characterNameArray.join(" ");
+}
+
+/**
+ * Event Listener for 'clicks' on the Randomize Button
+ */
 function addRandomizeButtonEventListener() {
     const randomizeButton = document.querySelector("#randomize-button");
 
@@ -116,6 +158,20 @@ function addRandomizeButtonEventListener() {
         randomizeTeams();
         addTeams(4, firstTeam, secondTeam);
     });
+}
+
+/**
+ * Changes the character's image background based on its rarity.
+ * 
+ * @param {string} rarity The rarity of the character 
+ * @param {Object} image HTML img element representing an image
+ */
+function changeCharBackground(rarity, image) {
+    if (rarity == "5") {
+        image.style.background = fiveStarBackgroundColor;
+    } else {
+        image.style.background = fourStarBackgroundColor;
+    }
 }
 
 // Colors used in site
@@ -176,13 +232,13 @@ for (let characterIndex = 0; characterIndex < characterCards.length; characterIn
     let currentCharacter = characterNameHolder.textContent;
     let currentCharRarity = characters[currentCharacter]["rarity"];
 
-    if (currentCharRarity == "5") {
+    changeCharBackground(currentCharRarity, characterImageHolder);
+
+    /*if (currentCharRarity == "5") {
         characterImageHolder.style.background = fiveStarBackgroundColor;
     } else {
         characterImageHolder.style.background = fourStarBackgroundColor;
-    }
+    }*/
 }
 
 addRandomizeButtonEventListener();
-//randomizeTeams();
-//addTeams(4, firstTeam, secondTeam);
