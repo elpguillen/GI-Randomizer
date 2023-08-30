@@ -212,9 +212,9 @@ while(index < data.length) {
     characters[characterName] = genshinCharacter;
     index++;
 }
-
+/*
 let characterGrid = document.querySelector('.characters-grid');
-let characterCards = characterGrid.getElementsByClassName("character-card");
+let characterCards = characterGrid.getElementsByClassName("character-card");*/
 
 // for each character card element in html:
 //      1. Get the ImageHolder and NameHolder elements
@@ -225,7 +225,7 @@ let characterCards = characterGrid.getElementsByClassName("character-card");
  *      3. Find the name in the character dictionary to find its rarity
  *      4. Change the color in the ImageHolder based on the character's rarity
  */
-for (let characterIndex = 0; characterIndex < characterCards.length; characterIndex++) {
+/*for (let characterIndex = 0; characterIndex < characterCards.length; characterIndex++) {
     let characterImageHolder = characterCards[characterIndex].getElementsByClassName("character-image-holder")[0];
     let characterNameHolder = characterCards[characterIndex].getElementsByClassName("character-name-holder")[0];
 
@@ -233,6 +233,6 @@ for (let characterIndex = 0; characterIndex < characterCards.length; characterIn
     let currentCharRarity = characters[currentCharacter]["rarity"];
 
     changeCharBackground(currentCharRarity, characterImageHolder);
-}
+}*/
 
 addRandomizeButtonEventListener();
