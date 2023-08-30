@@ -203,8 +203,8 @@ img {
   align-items: center;
   width: var(--size-card-small);
   height: var(--size-card-small);
-  border-radius: var(--size-card-border-radius) var(--size-card-border-radius);
-  border: 1px solid blue;
+  overflow: hidden;
+  border-radius: var(--size-card-border-radius) var(--size-card-border-radius) 0 0;
 }
 
 .character-name-holder {
@@ -247,38 +247,3 @@ img {
     font-size: large;
   }
 }
-
-/*@media (min-width: 50em) {
-  .character-image-holder {
-    width: 8rem;
-    height: 8rem;
-  }
-
-  .character-name-holder {
-    width: 8rem;
-  }
-  
-  img {
-    width: 6rem;
-  }
-}*/
-
-/*
-.character-image-holder {
-  width: 8rem;
-  height: 8rem;
-  background-color: gray;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--size-card-border-radius) var(--size-card-border-radius);
-}
-
-.character-name-holder {
-  text-align: center;
-  padding: 0.5rem 1rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-*/

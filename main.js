@@ -233,12 +233,6 @@ for (let characterIndex = 0; characterIndex < characterCards.length; characterIn
     let currentCharRarity = characters[currentCharacter]["rarity"];
 
     changeCharBackground(currentCharRarity, characterImageHolder);
-
-    /*if (currentCharRarity == "5") {
-        characterImageHolder.style.background = fiveStarBackgroundColor;
-    } else {
-        characterImageHolder.style.background = fourStarBackgroundColor;
-    }*/
 }
 
 addRandomizeButtonEventListener();
