@@ -102,6 +102,10 @@ h1 {
 }
 
 button {
+  border: 0;
+}
+
+#randomize-button {
   cursor: pointer;
   border-radius: var(--size-medium);
   padding: 0.5em 0.25em;
@@ -149,11 +153,11 @@ img {
 
 .teams-container {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   margin-top: 2rem;
-  border: 1px solid red;
+  column-gap: 3rem;
 }
 
 .team-grid {
@@ -161,7 +165,6 @@ img {
   grid-template-columns: repeat(4, var(--size-card-min-width));
   justify-items: center;
   gap: 1rem;
-  border: 1px solid gold;
 }
 
 .team-image-holder {
@@ -183,11 +186,15 @@ img {
   flex-wrap: wrap;
 }*/
 
+.character-container {
+
+}
+
 .characters-grid {
   display: grid;
   /*grid-template-columns: repeat(4, var(--size-card-min-width));*/
-  grid-template-columns: repeat(auto-fill, minmax(var(--size-card-min-width), 1fr));
-  gap: 0.1rem;
+  grid-template-columns: repeat(auto-fill, min(var(--size-card-min-width)));
+  gap: 0.75rem;
   justify-content: center;
 }
 
@@ -195,6 +202,13 @@ img {
   display: block;
   border-radius: var(--size-card-border-radius);
   padding: 0.5rem;
+}
+
+.character-card-button {
+  text-align: center;
+  width: var(--size-card-small);
+  cursor: pointer;
+  border-radius: var(--size-card-border-radius) var(--size-card-border-radius) 0 0;
 }
 
 .character-image-holder {
@@ -209,13 +223,14 @@ img {
 
 .character-name-holder {
   width: var(--size-card-small);
-  padding: .5rem .5rem;
+  padding: .25rem .25rem;
   text-align: center;
   font-size: small;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  border: 1px solid red;
+  background: #E9E5DC;
+  color: black;
 }
 
 .default-image {
@@ -230,10 +245,14 @@ img {
   }
 
   .characters-grid {
-    grid-template-columns: repeat(auto-fill, minmax(var(--size-card-max-width), 1fr));
+    grid-template-columns: repeat(auto-fill, min(var(--size-card-max-width)));
   }
 
   img {
+    width: var(--size-card-large);
+  }
+
+  .character-card-button {
     width: var(--size-card-large);
   }
 
