@@ -100,20 +100,19 @@ function randomizeTeam(teamSize, charactersAvailable) {
  */
 function createTeam(teamSize, characters) {
 
-    let team = Array(teamSize).fill("");
-
     if (!(Array.isArray(characters)) || teamSize < 1 || teamSize > 4 ||
             characters.length < 1 || characters.length < teamSize)
         return team;
-
+    
+    let randomIndex = 0;
     let startingIndex = 0;
     let endingIndex = characters.length;
-    let randomIndex = 0;
-
-    if (endingIndex < 1)
-        return team;
+    let team = Array(teamSize).fill("");
 
     for (let index = 0; index < teamSize; index++) {
+        
+        if (endingIndex < 1) break;
+        
         randomIndex = getRandomInt(startingIndex, endingIndex);
         team[index] = characters[randomIndex];
         // remove character added to team from the character array
@@ -122,6 +121,22 @@ function createTeam(teamSize, characters) {
     }
 
     return team;
+}
+
+function selectCharacters(teamSize, numOfTeams, characterList) {
+
+    if (teamSize < 1 || numOfTeams < 1 || characterList.length < 1)
+        return [];
+
+    let characterSelect = knuthShuffle(characterList);
+    let numCharacters = Math.min(teamSize * numOfTeams, characterList.length);
+    let charactersSelected = Array(numCharacters).fill("");
+
+    for (let index = 0; index < numCharacters; index++) {
+        charactersSelected[index] = characterSelect[index];
+    }
+
+    return charactersSelected;
 }
 
 /**
@@ -214,9 +229,20 @@ function addRandomizeButtonEventListener() {
     const randomizeButton = document.querySelector("#randomize-button");
 
     randomizeButton.addEventListener("click", function () {
-        firstTeam = randomizeTeam(4, characterList);
-        secondTeam = randomizeTeam(4, characterList);
+        let charactersSelected = selectCharacters(4, 2, characterList);
+        firstTeam = charactersSelected.slice(0, 4);
+        secondTeam = charactersSelected.slice(4, charactersSelected.length)
+        //firstTeam = randomizeTeam(4, characterList);
+        //secondTeam = randomizeTeam(4, characterList);
         addTeams(4, firstTeam, secondTeam, characters);
+    });
+}
+
+function addSelectButtonEventListener() {
+    const selectButton = document.querySelector(".characters-toggle-select-button");
+
+    selectButton.addEventListener("click", function() {
+        console.log("Select button pressed!");
     });
 }
 
@@ -257,6 +283,20 @@ function createCharacterGrid() {
         let characterCard = createCharacterCard(currentCharacter);
         charactersGrid.appendChild(characterCard)
 
+        characterCard.addEventListener("click", function() {
+            this.classList.toggle("character-button-unselected");
+
+            //for (let nm of characterRoster) console.log(nm);
+
+            let name = this.getElementsByClassName("character-name-holder")[0].innerHTML;
+
+            if (characterRoster.has(name)) {
+                characterRoster.delete(name);
+            } else {
+                characterRoster.add(name);
+            }
+        })
+
         //console.log(currentCharacter);
     }
 }
@@ -295,7 +335,7 @@ function createCharacterCard(character) {
 
 
 // JSON data containing name, rarity, element, weapon type, and region of all current playable characters in Genshin Impact
-const genshinData = '{"character": [{"characterName": "Albedo", "characterRarity": "5", "characterElement": "Geo", "characterWeaponType": "Sword", "characterRegion": "Mondstadt"}, {"characterName": "Alhaitham", "characterRarity": "5", "characterElement": "Dendro", "characterWeaponType": "Sword", "characterRegion": "Sumeru"}, {"characterName": "Aloy", "characterRarity": "5", "characterElement": "Cryo", "characterWeaponType": "Bow", "characterRegion": "None"}, {"characterName": "Amber", "characterRarity": "4", "characterElement": "Pyro", "characterWeaponType": "Bow", "characterRegion": "Mondstadt"}, {"characterName": "Arataki Itto", "characterRarity": "5", "characterElement": "Geo", "characterWeaponType": "Claymore", "characterRegion": "Inazuma"}, {"characterName": "Baizhu", "characterRarity": "5", "characterElement": "Dendro", "characterWeaponType": "Catalyst", "characterRegion": "Liyue"}, {"characterName": "Barbara", "characterRarity": "4", "characterElement": "Hydro", "characterWeaponType": "Catalyst", "characterRegion": "Mondstadt"}, {"characterName": "Beidou", "characterRarity": "4", "characterElement": "Electro", "characterWeaponType": "Claymore", "characterRegion": "Liyue"}, {"characterName": "Bennett", "characterRarity": "4", "characterElement": "Pyro", "characterWeaponType": "Sword", "characterRegion": "Mondstadt"}, {"characterName": "Candace", "characterRarity": "4", "characterElement": "Hydro", "characterWeaponType": "Polearm", "characterRegion": "Sumeru"}, {"characterName": "Chongyun", "characterRarity": "4", "characterElement": "Cryo", "characterWeaponType": "Claymore", "characterRegion": "Liyue"}, {"characterName": "Collei", "characterRarity": "4", "characterElement": "Dendro", "characterWeaponType": "Bow", "characterRegion": "Sumeru"}, {"characterName": "Cyno", "characterRarity": "5", "characterElement": "Electro", "characterWeaponType": "Polearm", "characterRegion": "Sumeru"}, {"characterName": "Dehya", "characterRarity": "5", "characterElement": "Pyro", "characterWeaponType": "Claymore", "characterRegion": "Sumeru"}, {"characterName": "Diluc", "characterRarity": "5", "characterElement": "Pyro", "characterWeaponType": "Claymore", "characterRegion": "Mondstadt"}, {"characterName": "Diona", "characterRarity": "4", "characterElement": "Cryo", "characterWeaponType": "Bow", "characterRegion": "Mondstadt"}, {"characterName": "Dori", "characterRarity": "4", "characterElement": "Electro", "characterWeaponType": "Claymore", "characterRegion": "Sumeru"}, {"characterName": "Eula", "characterRarity": "5", "characterElement": "Cryo", "characterWeaponType": "Claymore", "characterRegion": "Mondstadt"}, {"characterName": "Faruzan", "characterRarity": "4", "characterElement": "Anemo", "characterWeaponType": "Bow", "characterRegion": "Sumeru"}, {"characterName": "Fischl", "characterRarity": "4", "characterElement": "Electro", "characterWeaponType": "Bow", "characterRegion": "Mondstadt"}, {"characterName": "Ganyu", "characterRarity": "5", "characterElement": "Cryo", "characterWeaponType": "Bow", "characterRegion": "Liyue"}, {"characterName": "Gorou", "characterRarity": "4", "characterElement": "Geo", "characterWeaponType": "Bow", "characterRegion": "Inazuma"}, {"characterName": "Hu Tao", "characterRarity": "5", "characterElement": "Pyro", "characterWeaponType": "Polearm", "characterRegion": "Liyue"}, {"characterName": "Jean", "characterRarity": "5", "characterElement": "Anemo", "characterWeaponType": "Sword", "characterRegion": "Mondstadt"}, {"characterName": "Kaedehara Kazuha", "characterRarity": "5", "characterElement": "Anemo", "characterWeaponType": "Sword", "characterRegion": "Inazuma"}, {"characterName": "Kaeya", "characterRarity": "4", "characterElement": "Cryo", "characterWeaponType": "Sword", "characterRegion": "Mondstadt"}, {"characterName": "Kamisato Ayaka", "characterRarity": "5", "characterElement": "Cryo", "characterWeaponType": "Sword", "characterRegion": "Inazuma"}, {"characterName": "Kamisato Ayato", "characterRarity": "5", "characterElement": "Hydro", "characterWeaponType": "Sword", "characterRegion": "Inazuma"}, {"characterName": "Kaveh", "characterRarity": "4", "characterElement": "Dendro", "characterWeaponType": "Claymore", "characterRegion": "Sumeru"}, {"characterName": "Keqing", "characterRarity": "5", "characterElement": "Electro", "characterWeaponType": "Sword", "characterRegion": "Liyue"}, {"characterName": "Kirara", "characterRarity": "4", "characterElement": "Dendro", "characterWeaponType": "Sword", "characterRegion": "Inazuma"}, {"characterName": "Klee", "characterRarity": "5", "characterElement": "Pyro", "characterWeaponType": "Catalyst", "characterRegion": "Mondstadt"}, {"characterName": "Kujou Sara", "characterRarity": "4", "characterElement": "Electro", "characterWeaponType": "Bow", "characterRegion": "Inazuma"}, {"characterName": "Kuki Shinobu", "characterRarity": "4", "characterElement": "Electro", "characterWeaponType": "Sword", "characterRegion": "Inazuma"}, {"characterName": "Layla", "characterRarity": "4", "characterElement": "Cryo", "characterWeaponType": "Sword", "characterRegion": "Sumeru"}, {"characterName": "Lisa", "characterRarity": "4", "characterElement": "Electro", "characterWeaponType": "Catalyst", "characterRegion": "Mondstadt"}, {"characterName": "Mika", "characterRarity": "4", "characterElement": "Cryo", "characterWeaponType": "Polearm", "characterRegion": "Mondstadt"}, {"characterName": "Mona", "characterRarity": "5", "characterElement": "Hydro", "characterWeaponType": "Catalyst", "characterRegion": "Mondstadt"}, {"characterName": "Nahida", "characterRarity": "5", "characterElement": "Dendro", "characterWeaponType": "Catalyst", "characterRegion": "Sumeru"}, {"characterName": "Nilou", "characterRarity": "5", "characterElement": "Hydro", "characterWeaponType": "Sword", "characterRegion": "Sumeru"}, {"characterName": "Ningguang", "characterRarity": "4", "characterElement": "Geo", "characterWeaponType": "Catalyst", "characterRegion": "Liyue"}, {"characterName": "Noelle", "characterRarity": "4", "characterElement": "Geo", "characterWeaponType": "Claymore", "characterRegion": "Mondstadt"}, {"characterName": "Qiqi", "characterRarity": "5", "characterElement": "Cryo", "characterWeaponType": "Sword", "characterRegion": "Liyue"}, {"characterName": "Raiden Shogun", "characterRarity": "5", "characterElement": "Electro", "characterWeaponType": "Polearm", "characterRegion": "Inazuma"}, {"characterName": "Razor", "characterRarity": "4", "characterElement": "Electro", "characterWeaponType": "Claymore", "characterRegion": "Mondstadt"}, {"characterName": "Rosaria", "characterRarity": "4", "characterElement": "Cryo", "characterWeaponType": "Polearm", "characterRegion": "Mondstadt"}, {"characterName": "Sangonomiya Kokomi", "characterRarity": "5", "characterElement": "Hydro", "characterWeaponType": "Catalyst", "characterRegion": "Inazuma"}, {"characterName": "Sayu", "characterRarity": "4", "characterElement": "Anemo", "characterWeaponType": "Claymore", "characterRegion": "Inazuma"}, {"characterName": "Shenhe", "characterRarity": "5", "characterElement": "Cryo", "characterWeaponType": "Polearm", "characterRegion": "Liyue"}, {"characterName": "Shikanoin Heizou", "characterRarity": "4", "characterElement": "Anemo", "characterWeaponType": "Catalyst", "characterRegion": "Inazuma"}, {"characterName": "Sucrose", "characterRarity": "4", "characterElement": "Anemo", "characterWeaponType": "Catalyst", "characterRegion": "Mondstadt"}, {"characterName": "Tartaglia", "characterRarity": "5", "characterElement": "Hydro", "characterWeaponType": "Bow", "characterRegion": "Snezhnaya"}, {"characterName": "Thoma", "characterRarity": "4", "characterElement": "Pyro", "characterWeaponType": "Polearm", "characterRegion": "Inazuma"}, {"characterName": "Tighnari", "characterRarity": "5", "characterElement": "Dendro", "characterWeaponType": "Bow", "characterRegion": "Sumeru"}, {"characterName": "Traveler", "characterRarity": "5", "characterElement": "None", "characterWeaponType": "Sword", "characterRegion": "None"}, {"characterName": "Venti", "characterRarity": "5", "characterElement": "Anemo", "characterWeaponType": "Bow", "characterRegion": "Mondstadt"}, {"characterName": "Wanderer", "characterRarity": "5", "characterElement": "Anemo", "characterWeaponType": "Catalyst", "characterRegion": "Sumeru"}, {"characterName": "Xiangling", "characterRarity": "4", "characterElement": "Pyro", "characterWeaponType": "Polearm", "characterRegion": "Liyue"}, {"characterName": "Xiao", "characterRarity": "5", "characterElement": "Anemo", "characterWeaponType": "Polearm", "characterRegion": "Liyue"}, {"characterName": "Xingqiu", "characterRarity": "4", "characterElement": "Hydro", "characterWeaponType": "Sword", "characterRegion": "Liyue"}, {"characterName": "Xinyan", "characterRarity": "4", "characterElement": "Pyro", "characterWeaponType": "Claymore", "characterRegion": "Liyue"}, {"characterName": "Yae Miko", "characterRarity": "5", "characterElement": "Electro", "characterWeaponType": "Catalyst", "characterRegion": "Inazuma"}, {"characterName": "Yanfei", "characterRarity": "4", "characterElement": "Pyro", "characterWeaponType": "Catalyst", "characterRegion": "Liyue"}, {"characterName": "Yaoyao", "characterRarity": "4", "characterElement": "Dendro", "characterWeaponType": "Polearm", "characterRegion": "Liyue"}, {"characterName": "Yelan", "characterRarity": "5", "characterElement": "Hydro", "characterWeaponType": "Bow", "characterRegion": "Liyue"}, {"characterName": "Yoimiya", "characterRarity": "5", "characterElement": "Pyro", "characterWeaponType": "Bow", "characterRegion": "Inazuma"}, {"characterName": "Yun Jin", "characterRarity": "4", "characterElement": "Geo", "characterWeaponType": "Polearm", "characterRegion": "Liyue"}, {"characterName": "Zhongli", "characterRarity": "5", "characterElement": "Geo", "characterWeaponType": "Polearm", "characterRegion": "Liyue"}]}';
+const genshinData = '{"character": [{"characterName": "Albedo", "characterRarity": "5", "characterElement": "Geo", "characterWeaponType": "Sword", "characterRegion": "Mondstadt"}, {"characterName": "Alhaitham", "characterRarity": "5", "characterElement": "Dendro", "characterWeaponType": "Sword", "characterRegion": "Sumeru"}, {"characterName": "Aloy", "characterRarity": "5", "characterElement": "Cryo", "characterWeaponType": "Bow", "characterRegion": "None"}, {"characterName": "Amber", "characterRarity": "4", "characterElement": "Pyro", "characterWeaponType": "Bow", "characterRegion": "Mondstadt"}, {"characterName": "Arataki Itto", "characterRarity": "5", "characterElement": "Geo", "characterWeaponType": "Claymore", "characterRegion": "Inazuma"}, {"characterName": "Baizhu", "characterRarity": "5", "characterElement": "Dendro", "characterWeaponType": "Catalyst", "characterRegion": "Liyue"}, {"characterName": "Barbara", "characterRarity": "4", "characterElement": "Hydro", "characterWeaponType": "Catalyst", "characterRegion": "Mondstadt"}, {"characterName": "Beidou", "characterRarity": "4", "characterElement": "Electro", "characterWeaponType": "Claymore", "characterRegion": "Liyue"}, {"characterName": "Bennett", "characterRarity": "4", "characterElement": "Pyro", "characterWeaponType": "Sword", "characterRegion": "Mondstadt"}, {"characterName": "Candace", "characterRarity": "4", "characterElement": "Hydro", "characterWeaponType": "Polearm", "characterRegion": "Sumeru"}, {"characterName": "Chongyun", "characterRarity": "4", "characterElement": "Cryo", "characterWeaponType": "Claymore", "characterRegion": "Liyue"}, {"characterName": "Collei", "characterRarity": "4", "characterElement": "Dendro", "characterWeaponType": "Bow", "characterRegion": "Sumeru"}, {"characterName": "Cyno", "characterRarity": "5", "characterElement": "Electro", "characterWeaponType": "Polearm", "characterRegion": "Sumeru"}, {"characterName": "Dehya", "characterRarity": "5", "characterElement": "Pyro", "characterWeaponType": "Claymore", "characterRegion": "Sumeru"}, {"characterName": "Diluc", "characterRarity": "5", "characterElement": "Pyro", "characterWeaponType": "Claymore", "characterRegion": "Mondstadt"}, {"characterName": "Diona", "characterRarity": "4", "characterElement": "Cryo", "characterWeaponType": "Bow", "characterRegion": "Mondstadt"}, {"characterName": "Dori", "characterRarity": "4", "characterElement": "Electro", "characterWeaponType": "Claymore", "characterRegion": "Sumeru"}, {"characterName": "Eula", "characterRarity": "5", "characterElement": "Cryo", "characterWeaponType": "Claymore", "characterRegion": "Mondstadt"}, {"characterName": "Faruzan", "characterRarity": "4", "characterElement": "Anemo", "characterWeaponType": "Bow", "characterRegion": "Sumeru"}, {"characterName": "Fischl", "characterRarity": "4", "characterElement": "Electro", "characterWeaponType": "Bow", "characterRegion": "Mondstadt"}, {"characterName": "Freminet", "characterRarity": "4", "characterElement": "Cryo", "characterWeaponType": "Claymore", "characterRegion": "Fontaine"}, {"characterName": "Ganyu", "characterRarity": "5", "characterElement": "Cryo", "characterWeaponType": "Bow", "characterRegion": "Liyue"}, {"characterName": "Gorou", "characterRarity": "4", "characterElement": "Geo", "characterWeaponType": "Bow", "characterRegion": "Inazuma"}, {"characterName": "Hu Tao", "characterRarity": "5", "characterElement": "Pyro", "characterWeaponType": "Polearm", "characterRegion": "Liyue"}, {"characterName": "Jean", "characterRarity": "5", "characterElement": "Anemo", "characterWeaponType": "Sword", "characterRegion": "Mondstadt"}, {"characterName": "Kaedehara Kazuha", "characterRarity": "5", "characterElement": "Anemo", "characterWeaponType": "Sword", "characterRegion": "Inazuma"}, {"characterName": "Kaeya", "characterRarity": "4", "characterElement": "Cryo", "characterWeaponType": "Sword", "characterRegion": "Mondstadt"}, {"characterName": "Kamisato Ayaka", "characterRarity": "5", "characterElement": "Cryo", "characterWeaponType": "Sword", "characterRegion": "Inazuma"}, {"characterName": "Kamisato Ayato", "characterRarity": "5", "characterElement": "Hydro", "characterWeaponType": "Sword", "characterRegion": "Inazuma"}, {"characterName": "Kaveh", "characterRarity": "4", "characterElement": "Dendro", "characterWeaponType": "Claymore", "characterRegion": "Sumeru"}, {"characterName": "Keqing", "characterRarity": "5", "characterElement": "Electro", "characterWeaponType": "Sword", "characterRegion": "Liyue"}, {"characterName": "Kirara", "characterRarity": "4", "characterElement": "Dendro", "characterWeaponType": "Sword", "characterRegion": "Inazuma"}, {"characterName": "Klee", "characterRarity": "5", "characterElement": "Pyro", "characterWeaponType": "Catalyst", "characterRegion": "Mondstadt"}, {"characterName": "Kujou Sara", "characterRarity": "4", "characterElement": "Electro", "characterWeaponType": "Bow", "characterRegion": "Inazuma"}, {"characterName": "Kuki Shinobu", "characterRarity": "4", "characterElement": "Electro", "characterWeaponType": "Sword", "characterRegion": "Inazuma"}, {"characterName": "Layla", "characterRarity": "4", "characterElement": "Cryo", "characterWeaponType": "Sword", "characterRegion": "Sumeru"}, {"characterName": "Lisa", "characterRarity": "4", "characterElement": "Electro", "characterWeaponType": "Catalyst", "characterRegion": "Mondstadt"}, {"characterName": "Lynette", "characterRarity": "4", "characterElement": "Anemo", "characterWeaponType": "Sword", "characterRegion": "Fontaine"}, {"characterName": "Lyney", "characterRarity": "5", "characterElement": "Pyro", "characterWeaponType": "Bow", "characterRegion": "Fontaine"}, {"characterName": "Mika", "characterRarity": "4", "characterElement": "Cryo", "characterWeaponType": "Polearm", "characterRegion": "Mondstadt"}, {"characterName": "Mona", "characterRarity": "5", "characterElement": "Hydro", "characterWeaponType": "Catalyst", "characterRegion": "Mondstadt"}, {"characterName": "Nahida", "characterRarity": "5", "characterElement": "Dendro", "characterWeaponType": "Catalyst", "characterRegion": "Sumeru"}, {"characterName": "Neuvillette", "characterRarity": "5", "characterElement": "Hydro", "characterWeaponType": "Catalyst", "characterRegion": "Fontaine"}, {"characterName": "Nilou", "characterRarity": "5", "characterElement": "Hydro", "characterWeaponType": "Sword", "characterRegion": "Sumeru"}, {"characterName": "Ningguang", "characterRarity": "4", "characterElement": "Geo", "characterWeaponType": "Catalyst", "characterRegion": "Liyue"}, {"characterName": "Noelle", "characterRarity": "4", "characterElement": "Geo", "characterWeaponType": "Claymore", "characterRegion": "Mondstadt"}, {"characterName": "Qiqi", "characterRarity": "5", "characterElement": "Cryo", "characterWeaponType": "Sword", "characterRegion": "Liyue"}, {"characterName": "Raiden Shogun", "characterRarity": "5", "characterElement": "Electro", "characterWeaponType": "Polearm", "characterRegion": "Inazuma"}, {"characterName": "Razor", "characterRarity": "4", "characterElement": "Electro", "characterWeaponType": "Claymore", "characterRegion": "Mondstadt"}, {"characterName": "Rosaria", "characterRarity": "4", "characterElement": "Cryo", "characterWeaponType": "Polearm", "characterRegion": "Mondstadt"}, {"characterName": "Sangonomiya Kokomi", "characterRarity": "5", "characterElement": "Hydro", "characterWeaponType": "Catalyst", "characterRegion": "Inazuma"}, {"characterName": "Sayu", "characterRarity": "4", "characterElement": "Anemo", "characterWeaponType": "Claymore", "characterRegion": "Inazuma"}, {"characterName": "Shenhe", "characterRarity": "5", "characterElement": "Cryo", "characterWeaponType": "Polearm", "characterRegion": "Liyue"}, {"characterName": "Shikanoin Heizou", "characterRarity": "4", "characterElement": "Anemo", "characterWeaponType": "Catalyst", "characterRegion": "Inazuma"}, {"characterName": "Sucrose", "characterRarity": "4", "characterElement": "Anemo", "characterWeaponType": "Catalyst", "characterRegion": "Mondstadt"}, {"characterName": "Tartaglia", "characterRarity": "5", "characterElement": "Hydro", "characterWeaponType": "Bow", "characterRegion": "Snezhnaya"}, {"characterName": "Thoma", "characterRarity": "4", "characterElement": "Pyro", "characterWeaponType": "Polearm", "characterRegion": "Inazuma"}, {"characterName": "Tighnari", "characterRarity": "5", "characterElement": "Dendro", "characterWeaponType": "Bow", "characterRegion": "Sumeru"}, {"characterName": "Traveler", "characterRarity": "5", "characterElement": "None", "characterWeaponType": "Sword", "characterRegion": "None"}, {"characterName": "Venti", "characterRarity": "5", "characterElement": "Anemo", "characterWeaponType": "Bow", "characterRegion": "Mondstadt"}, {"characterName": "Wanderer", "characterRarity": "5", "characterElement": "Anemo", "characterWeaponType": "Catalyst", "characterRegion": "Sumeru"}, {"characterName": "Xiangling", "characterRarity": "4", "characterElement": "Pyro", "characterWeaponType": "Polearm", "characterRegion": "Liyue"}, {"characterName": "Xiao", "characterRarity": "5", "characterElement": "Anemo", "characterWeaponType": "Polearm", "characterRegion": "Liyue"}, {"characterName": "Xingqiu", "characterRarity": "4", "characterElement": "Hydro", "characterWeaponType": "Sword", "characterRegion": "Liyue"}, {"characterName": "Xinyan", "characterRarity": "4", "characterElement": "Pyro", "characterWeaponType": "Claymore", "characterRegion": "Liyue"}, {"characterName": "Yae Miko", "characterRarity": "5", "characterElement": "Electro", "characterWeaponType": "Catalyst", "characterRegion": "Inazuma"}, {"characterName": "Yanfei", "characterRarity": "4", "characterElement": "Pyro", "characterWeaponType": "Catalyst", "characterRegion": "Liyue"}, {"characterName": "Yaoyao", "characterRarity": "4", "characterElement": "Dendro", "characterWeaponType": "Polearm", "characterRegion": "Liyue"}, {"characterName": "Yelan", "characterRarity": "5", "characterElement": "Hydro", "characterWeaponType": "Bow", "characterRegion": "Liyue"}, {"characterName": "Yoimiya", "characterRarity": "5", "characterElement": "Pyro", "characterWeaponType": "Bow", "characterRegion": "Inazuma"}, {"characterName": "Yun Jin", "characterRarity": "4", "characterElement": "Geo", "characterWeaponType": "Polearm", "characterRegion": "Liyue"}, {"characterName": "Zhongli", "characterRarity": "5", "characterElement": "Geo", "characterWeaponType": "Polearm", "characterRegion": "Liyue"}]}';
 let genshinJsonData = JSON.parse(genshinData);
 
 // Retrieves the array within the JSON object
@@ -303,8 +343,11 @@ let data = genshinJsonData.character;
 // Dictionary: key -> characterName, value -> GenshinCharacter
 let characters = {};
 
-// List of characters (string of names)
-let characterList = []
+// List of all characters (string of names)
+let characterList = [];
+
+// set of available characters to user
+let characterRoster = new Set();
 
 let index = 0;
 // add characters from json data to dictionary
@@ -317,10 +360,37 @@ while(index < data.length) {
     let genshinCharacter = new GenshinCharacter(characterName, characterRarity, characterElement, characterWeaponType, characterRegion);
 
     characterList.push(characterName);
+    characterRoster.add(characterName);
 
     characters[characterName] = genshinCharacter;
     index++;
 }
 
+function knuthShuffle(array) {
+    let currentIndex = array.length;
+    let randomIndex, tempValue;
+  
+    // While there remain elements to shuffle...
+    while (currentIndex !== 0) {
+  
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+  
+      // And swap it with the current element.
+      tempValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = tempValue;
+    }
+  
+    return array;
+}
+
+/*const originalArray = [1, 2, 3, 4, 5];
+const shuffledArray = knuthShuffle(originalArray);
+console.log(shuffledArray);*/
+
 createCharacterGrid();
+addSelectButtonEventListener();
 addRandomizeButtonEventListener();
+//selectCharacters(1, 1, characterList.slice(0, 1));

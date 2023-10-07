@@ -209,6 +209,11 @@ img {
   width: var(--size-card-small);
   cursor: pointer;
   border-radius: var(--size-card-border-radius) var(--size-card-border-radius) 0 0;
+  opacity: 100%;
+}
+
+.character-button-unselected {
+  opacity: 50%;
 }
 
 .character-image-holder {
@@ -236,6 +241,14 @@ img {
 .default-image {
   width: 40%;
   height: 40%;
+}
+
+.options-container {
+  display: grid;
+}
+
+.characters-toggle-select-button {
+  cursor: pointer;
 }
 
 @media (min-width: 50em) {
