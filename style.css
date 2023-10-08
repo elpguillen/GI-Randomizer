@@ -245,10 +245,13 @@ img {
 
 .options-container {
   display: grid;
+  justify-items: center;
 }
 
 .characters-toggle-select-button {
   cursor: pointer;
+  padding: .5rem;
+  border-radius: var(--size-medium);
 }
 
 @media (min-width: 50em) {
