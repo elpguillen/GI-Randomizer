@@ -139,6 +139,7 @@ section {
   height: 40px;
   width: 40px;
   margin: 0 2rem;
+  opacity: 0%;
 }
 
 .container {
