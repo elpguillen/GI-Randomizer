@@ -387,6 +387,7 @@ function createCharacterCard(character) {
     changeCharBackground(currentCharRarity, characterImageHolder);
 
     characterImage.src = "/icons/" + toLowerAndHyphenate(character) + ".png";
+    characterImage.setAttribute('draggable', false);
     
     characterImageHolder.appendChild(characterImage);
 
