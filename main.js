@@ -6,6 +6,7 @@ const emptyBackgroundColor = "#86898D";
 const lightGrayColor = "#E9E5DC";
 const darkGrayColor = "7C7E83";
 
+// Array holding characters in each team with corresponding size
 let firstTeamMaxSize = 4;
 let secondTeamMaxSize = 4;
 let firstTeam = [];
@@ -17,6 +18,7 @@ let genshinJsonData = JSON.parse(genshinData);
 
 // Retrieves the array within the JSON object
 let data = genshinJsonData.character;
+
 // Dictionary: key -> characterName, value -> GenshinCharacter
 let characters = {};
 
@@ -29,6 +31,7 @@ let allCharacters = new Set();
 // set of available characters to user
 let characterRoster = new Set();
 
+// determines whether or not Select All button is active
 let isUnSelectedAll = true;
 
 
@@ -88,61 +91,6 @@ function getRandomInt(min, max) {
     return Math.floor((Math.random() * (max - min) + min));
 }
 
-
-/**
- * Randomizes two teams of characters
- * @param {number} teamSize number of characters in team
- * @param {string[]} charactersAvailable array of available characters
- * @returns An array containing a team of characters of the designated team size, empty on error
- */
-/*function randomizeTeam(teamSize, charactersAvailable) {
-
-    if (typeof teamSize !== "number" || teamSize < 1) {
-        throw new Error("Team Size should be a number greater than zero!");
-    }
-
-    if (teamSize > 4) {
-        throw new Error("Team Size should not be greater than 4!");
-    }
-
-    try {
-        return createTeam(teamSize, charactersAvailable.slice());
-    } catch {
-        return [];
-    }
-}*/
-
-/**
- * 
- * @param {number} teamSize the number of characters in the team
- * @param {string[]} characters an array of character names
- * @returns A team of characters (array of names), empty if invalid paramaters
- */
-/*function createTeam(teamSize, characters) {
-
-    if (!(Array.isArray(characters)) || teamSize < 1 || teamSize > 4 ||
-            characters.length < 1 || characters.length < teamSize)
-        return team;
-    
-    let randomIndex = 0;
-    let startingIndex = 0;
-    let endingIndex = characters.length;
-    let team = Array(teamSize).fill("");
-
-    for (let index = 0; index < teamSize; index++) {
-        
-        if (endingIndex < 1) break;
-        
-        randomIndex = getRandomInt(startingIndex, endingIndex);
-        team[index] = characters[randomIndex];
-        // remove character added to team from the character array
-        characters.splice(randomIndex, 1); 
-        endingIndex--;
-    }
-
-    return team;
-}*/
-
 /**
  * Selects characters to be used for the teams.
  * @param {number} teamSize size of each team
@@ -187,27 +135,32 @@ function addTeams(teamSize, teamOne, teamTwo, characters) {
         throw new Error("Team One and Two should be arrays.");
     }
 
+    // Get the containers that hold the teams in the html
     let teamGrids = document.getElementsByClassName("team-grid");
     let teamOneContainer = teamGrids[0];
     let teamTwoContainer = teamGrids[1];
 
+    // Get the character cards/slots for each team
     let charactersTeamOne = teamOneContainer.getElementsByClassName("character-card");
     let charactersTeamTwo = teamTwoContainer.getElementsByClassName("character-card");
 
     for (let index = 0; index < teamSize; index++) {
 
+        // Get Image elem and character name elem for current index and team
         let teamOneImage = charactersTeamOne[index].querySelector('img');
         let teamTwoImage = charactersTeamTwo[index].querySelector('img');
         let teamOneNameHolder = charactersTeamOne[index].querySelector('.character-name-holder');
         let teamTwoNameHolder = charactersTeamTwo[index].querySelector('.character-name-holder');
 
         if (index >= teamOne.length) {
+            // no more characters to add so display default image and text for character
             teamOneImage.classList.add("default-image");
             teamOneNameHolder.textContent = "-----";
             teamOneImage.src = "images/add.png";
             teamOneImage.style.background = emptyBackgroundColor;
 
         } else {
+            // update image and text that corresponds to the character at 'index' from 'teamOne'
             let teamOneChar = teamOne[index];
             let teamOneCharRarity = characters[teamOneChar]["rarity"];
 
@@ -219,11 +172,13 @@ function addTeams(teamSize, teamOne, teamTwo, characters) {
         }
 
         if (index >= teamTwo.length) {
+            // no more characters to add so display default image and text for character
             teamTwoImage.classList.add("default-image");
             teamTwoNameHolder.textContent = "-----";
             teamTwoImage.src = "images/add.png";
             teamTwoImage.style.background = emptyBackgroundColor;
         } else {
+            // update image and text that corresponds to the character at 'index' from 'teamOne'
             let teamTwoChar = teamTwo[index];
             let teamTwoCharRarity = characters[teamTwoChar]["rarity"];
 
@@ -277,13 +232,13 @@ function addRandomizeButtonEventListener() {
     const randomizeButton = document.querySelector("#randomize-button");
 
     randomizeButton.addEventListener("click", function () {
-        //let charactersSelected = selectCharacters(4, 2, characterList);
-        //let chooseFromCharacters = Array.from(characterRoster);
+        // Gets the 4 characters for each team
         let charactersSelected = selectCharacters(4, 2, Array.from(characterRoster));
 
         let numCharacters = charactersSelected.length;
         let splitIndex = Math.min(4, numCharacters);
 
+        // Add the characters selected for each team
         firstTeam = charactersSelected.slice(0, splitIndex);
         secondTeam = charactersSelected.slice(splitIndex, numCharacters);
 
@@ -291,6 +246,10 @@ function addRandomizeButtonEventListener() {
     });
 }
 
+/**
+ * Event Listener for 'clicks' on the Select/Unselect All Button.
+ * Switches between Select All and Unselect All
+ */
 function addSelectButtonEventListener() {
     const selectButton = document.querySelector(".characters-toggle-select-button");
 
@@ -300,6 +259,7 @@ function addSelectButtonEventListener() {
 
         for (let index = 0; index < characterButtons.length; index++) {
             let characterButton = characterButtons[index];
+            
             if (isUnSelectedAll) {
                 characterRoster.clear();
                 characterButton.classList.add("character-button-unselected");
@@ -399,6 +359,11 @@ function createCharacterCard(character) {
     return characterButton;
 }
 
+/**
+ * Randomly shuffles element in array
+ * @param {string[]} array  array with items to shuffle
+ * @returns the given array with elements shuffled
+ */
 function knuthShuffle(array) {
     let currentIndex = array.length;
     let randomIndex, tempValue;
@@ -440,18 +405,3 @@ while(index < data.length) {
 createCharacterGrid();
 addSelectButtonEventListener();
 addRandomizeButtonEventListener();
-
-/*let set1 = new Set([1,2,3,4]);
-let set2 = new Set(set1);
-
-set2.add(5);
-
-Array.from(set2).forEach(element => {
-    console.log(element)
-});
-
-console.log("---");
-
-Array.from(set1).forEach(element => {
-    console.log(element)
-});*/
