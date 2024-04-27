@@ -34,6 +34,14 @@ let characterRoster = new Set();
 // determines whether or not Select All button is active
 let isUnSelectedAll = true;
 
+// Map to hold preset team compositions
+let teamComps = new Map();
+
+// Arle vape team comp
+const arleVape = { 'Arlecchino Vape': ["Arlecchino", "Yelan", "Zhongli", "Bennett"]};
+
+// Add all the preset teams to map
+teamComps.set(arleVape);
 
 /**
  * @Class
