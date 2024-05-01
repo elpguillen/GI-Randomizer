@@ -40,8 +40,24 @@ let teamComps = new Map();
 // Arle vape team comp
 const arleVape = { 'Arlecchino Vape': ["Arlecchino", "Yelan", "Zhongli", "Bennett"]};
 
+// Lyney mono pyro team
+const lyneyMonoPyro = { 'Lyney Mono Pyro': ["Lyney", "Xiangling", "Kazuha", "Bennett"]};
+
+// Chevreuse
+const chevreuseOverload = { 'Chevreuse Overload': ["Chevreuse", "Raiden Shogun", "Xiangling", "Bennett"]};
+
+// Yoimiya Vaporize
+const yoimiyaVape = { 'Yoimiya Vaporize:': ["Yoimiya", "Yelan", "Yun Jin", "Zhongli"]};
+
+// Hu Tao Vaporize
+const hutaoVape = { 'Hu Tao Vaporize': ["Hu Tao", "Xingqiu", "Kazuha", "Zhongi"]};
+
 // Add all the preset teams to map
 teamComps.set(arleVape);
+teamComps.set(lyneyMonoPyro);
+teamComps.set(chevreuseOverload);
+teamComps.set(yoimiyaVape);
+teamComps.set('Hu Tao Vaporize', ["Hu Tao", "Xingqiu", "Kazuha", "Zhongi"]);
 
 /**
  * @Class
