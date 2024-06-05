@@ -1,3 +1,7 @@
 ---------- Hydro ----------
 1. Nilou Bloom -> Nilou, Kokomi, Nahida, Collei
 2. Hydro Power -> Furina, Yelan, Kokomi, Kazuha
+
+---------- Dendro ----------
+1. Nahida HyperBloom -> Nahida, Yelan, Xingqiu, Kuki Shinobu
+2. Big-T -> Tighnari, Yae Miko, Collei, Zhongli
