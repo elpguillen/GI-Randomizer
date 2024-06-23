@@ -5,3 +5,8 @@
 ---------- Dendro ----------
 1. Nahida HyperBloom -> Nahida, Yelan, Xingqiu, Kuki Shinobu
 2. Big-T -> Tighnari, Yae Miko, Collei, Zhongli
+
+---------- Geo ----------
+1. Navia BOOM - Navia, Furina, Charlotte, Zhongli
+2. Navia Crystallize - Navia, Furina, Zhongli, Bennett
+3. Navia all attack - Navia, Ningguang, Xiangling, Bennett
