@@ -1,6 +1,8 @@
 ---------- Hydro ----------
 1. Nilou Bloom -> Nilou, Kokomi, Nahida, Collei
 2. Hydro Power -> Furina, Yelan, Kokomi, Kazuha
+3. Neuvillete Electro-Charge -> Neuvillete, Fischl, Zhongli, Kazuha
+4. Neuvillete Electro-Charge 2 -> Neuvillete, Yae Miko, Beidou, Kazuha
 
 ---------- Dendro ----------
 1. Nahida HyperBloom -> Nahida, Yelan, Xingqiu, Kuki Shinobu
