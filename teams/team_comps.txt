@@ -18,3 +18,8 @@
 2. Gaming Melt -> Gaming, Ganyu, Leyla, Xianyun
 3. Chevreuse Overload -> Chevreuse, Raiden Shogun, Xiangling, Bennett
 4. Yoimiya Vape -> Yoimiya, Yelan, Yun Jin, Zhongli
+
+---------- Electro ----------
+1. Clorinde Aggravate -> Clorinde, Fischl, Nahida, Baizhu
+2. Kuki HyperBloom -> Kuki Shinobu, Nahida, Yelan, Xingqiu
+3. Yae Miko -> Yae Miko, Nahida, Fischl, Zhongli
