@@ -29,4 +29,7 @@
 2. Ayaka Freeze -> Ayaka, Furina, Shenhe, Jean
 3. Wriothesley -> Wriothesley, Thoma, Kazuha, Bennett
 
+---------- Physical ----------
+1. Eula, Raiden Shogun, Zhongli, Albedo
+2. Eula, Raiden Shogun, Mika, Kujou Sara
 
