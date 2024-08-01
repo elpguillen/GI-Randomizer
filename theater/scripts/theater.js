@@ -18,6 +18,10 @@ let allCharacters = new Set();
 // set of available characters to user
 let characterRoster = new Set();
 
+// Colors used in site
+const fiveStarBackgroundColor = "#AB6E28";
+const fourStarBackgroundColor = "#7465A3";
+
 /**
  * @Class
  * Represents a character in Genshin Impact
@@ -96,6 +100,20 @@ function revertToLowerAndHyphenate(characterName) {
     return characterNameArray.join(" ");
 }
 
+/**
+ * Changes the character's image background based on its rarity.
+ * 
+ * @param {string} rarity The rarity of the character 
+ * @param {Object} image HTML img element representing an image
+ */
+function changeCharBackground(rarity, image) {
+    if (rarity == "5") {
+        image.style.background = fiveStarBackgroundColor;
+    } else {
+        image.style.background = fourStarBackgroundColor;
+    }
+}
+
 
 function createCharacterGrid() {
     
@@ -137,7 +155,7 @@ function createCharacterCard(character) {
     console.log(currentCharacter);
     console.log(characters);
     let currentCharRarity = characters[currentCharacter]["rarity"];
-    //changeCharBackground(currentCharRarity, characterImageHolder);
+    changeCharBackground(currentCharRarity, characterImageHolder);
 
     characterImage.src = "../../icons/" + toLowerAndHyphenate(character) + ".png";
     characterImage.setAttribute('draggable', false);
