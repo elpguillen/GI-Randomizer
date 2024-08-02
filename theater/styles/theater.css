@@ -81,4 +81,68 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-}  
+}
+
+.characters-grid {
+  display: grid;
+  /*grid-template-columns: repeat(4, var(--size-card-min-width));*/
+  grid-template-columns: repeat(auto-fill, min(var(--size-card-min-width)));
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.character-card {
+  display: block;
+  border-radius: var(--size-card-border-radius);
+  padding: 0.5rem;
+}
+
+.character-card-button {
+  text-align: center;
+  width: var(--size-card-small);
+  cursor: pointer;
+  border-radius: var(--size-card-border-radius) var(--size-card-border-radius) 0 0;
+  opacity: 100%;
+}
+
+.character-button-unselected {
+  opacity: 50%;
+}
+
+.character-image-holder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--size-card-small);
+  height: var(--size-card-small);
+  overflow: hidden;
+  border-radius: var(--size-card-border-radius) var(--size-card-border-radius) 0 0;
+}
+
+.character-name-holder {
+  width: var(--size-card-small);
+  padding: .25rem .25rem;
+  text-align: center;
+  font-size: small;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background: #E9E5DC;
+  color: black;
+}
+
+.default-image {
+  width: 40%;
+  height: 40%;
+}
+
+.options-container {
+  display: grid;
+  justify-items: center;
+}
+
+.characters-toggle-select-button {
+  cursor: pointer;
+  padding: .5rem;
+  border-radius: var(--size-medium);
+}
