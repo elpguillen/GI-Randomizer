@@ -1,7 +1,27 @@
 :root {
 
-    --clr-neutral-900: hsl(0 0% 0%);
-    --clr-neutral-100: hsl(0 0% 100%);
+  --clr-neutral-900: hsl(0 0% 0%);
+  --clr-neutral-100: hsl(0 0% 100%);
+
+  --size-small: 0.25rem;
+  --size-small-2: 0.5rem;
+  --size-small-3: 0.75rem;
+  --size-medium: 1rem;
+  --size-medium-2: 1.5rem;
+  --size-medium-3: 2rem;
+  --size-large: 3rem;
+  --size-large-2: 4rem;
+  --size-large-3: 5rem;
+  --size-xlarge: 6rem;
+  --size-2xlarge: 7rem;
+  --size-3xlarge: 8rem;
+
+  --size-card-min-width: var(--size-large-3);
+  --size-card-max-width: var(--size-3xlarge);
+  --size-card-small: var(--size-large-3);
+  --size-card-large: var(--size-3xlarge);
+
+  --size-card-border-radius: 10%;
 
 }
 
@@ -44,36 +64,36 @@ body {
 
 /* A elements that don't have a class get default styles */
 a:not([class]) {
-    text-decoration-skip-ink: auto;
-  }
-  
-  /* Make images easier to work with */
-  img,
-  picture {
-    max-width: 100%;
-    display: block;
-  }
-  
-  /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
-  @media (prefers-reduced-motion: reduce) {
-    html:focus-within {
-     scroll-behavior: auto;
-    }
-    
-    *,
-    *::before,
-    *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
-    }
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
   }
 
-  /* general styling */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* general styling */
 
 body {
-    background-color: var(--clr-neutral-900);
+  background-color: var(--clr-neutral-900);
 }
 
 
