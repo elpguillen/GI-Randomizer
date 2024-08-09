@@ -131,8 +131,24 @@ function createCharacterGrid() {
     charactersGrid.classList.add("characters-grid");
 
     // TODO: add character cards and event listener for each character card
-    let characterCard = createCharacterCard("Shenhe");
-    charactersGrid.appendChild(characterCard);
+    for (let characterIndex = 0; characterIndex < characterList.length; characterIndex++) {
+
+        let currentCharacter = characterList[characterIndex];
+        let characterCard = createCharacterCard(currentCharacter);
+        charactersGrid.appendChild(characterCard)
+
+        characterCard.addEventListener("click", function() {
+            
+            this.classList.toggle("character-button-unselected");
+            let name = this.getElementsByClassName("character-name-holder")[0].innerHTML;
+
+            if (characterRoster.has(name)) {
+                characterRoster.delete(name);
+            } else {
+                characterRoster.add(name);
+            }
+        })
+    }
 }
 
 /**
