@@ -18,6 +18,9 @@ let allCharacters = new Set();
 // set of available characters to user
 let characterRoster = new Set();
 
+// list of available elements
+let elementList = ["pyro, hydro, anemo, electro, dendro, cryo, geo"]
+
 // Colors used in site
 const fiveStarBackgroundColor = "#AB6E28";
 const fourStarBackgroundColor = "#7465A3";
