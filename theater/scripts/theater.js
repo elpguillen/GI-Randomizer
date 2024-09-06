@@ -122,6 +122,7 @@ function changeCharBackground(rarity, image) {
     }
 }
 
+// let elementList = ["pyro, hydro, anemo, electro, dendro, cryo, geo"]
 function createElementGrid() {
     let mainElement = document.getElementsByTagName("main");
 
@@ -130,6 +131,12 @@ function createElementGrid() {
 
     mainElement[0].appendChild(elements);
     elements.appendChild(elementsContainer);
+
+    for (let elemIndex = 0; elemIndex < elementList.length; elemIndex++) {
+        let elem = document.createElement("h1");
+        elementsContainer.appendChild(elem);
+        elem.textContent = elementList[elemIndex];
+    }
 }
 
 
