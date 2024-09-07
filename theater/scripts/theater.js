@@ -131,6 +131,7 @@ function createElementGrid() {
 
     mainElement[0].appendChild(elements);
     elements.appendChild(elementsContainer);
+    elementsContainer.classList.add("elements-container");
 
     for (let elemIndex = 0; elemIndex < elementList.length; elemIndex++) {
         let elem = document.createElement("h1");
