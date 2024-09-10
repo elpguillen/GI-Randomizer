@@ -124,6 +124,7 @@ function changeCharBackground(rarity, image) {
 
 // let elementList = ["pyro, hydro, anemo, electro, dendro, cryo, geo"]
 function createElementGrid() {
+    let elementList = ["pyro", "hydro", "anemo", "electro", "dendro", "cryo", "geo"];
     let mainElement = document.getElementsByTagName("main");
 
     let elements = document.createElement("section");
@@ -134,9 +135,10 @@ function createElementGrid() {
     elementsContainer.classList.add("elements-container");
 
     for (let elemIndex = 0; elemIndex < elementList.length; elemIndex++) {
-        let elem = document.createElement("h1");
+        let elem = document.createElement("img");
         elementsContainer.appendChild(elem);
-        elem.textContent = elementList[elemIndex];
+        elem.src = "../../images/" + "element_anemo.webp";
+        //elem.textContent = elementList[elemIndex];
     }
 }
 
