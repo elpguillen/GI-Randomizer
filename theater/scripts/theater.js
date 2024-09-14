@@ -136,7 +136,7 @@ function createElementGrid() {
     for (let elemIndex = 0; elemIndex < elementList.length; elemIndex++) {
         let elem = document.createElement("img");
         elementsContainer.appendChild(elem);
-        elem.src = "../../images/" + "element_anemo.webp";
+        elem.src = "../../images/" + "element_" + elementList[elemIndex] + ".webp";
     }
 }
 
