@@ -137,6 +137,7 @@ function createElementGrid() {
         let elem = document.createElement("img");
         elementsContainer.appendChild(elem);
         elem.src = "../../images/" + "element_" + elementList[elemIndex] + ".webp";
+        elem.classList.add("element-image");
     }
 }
 
