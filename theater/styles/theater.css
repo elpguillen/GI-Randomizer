@@ -96,11 +96,18 @@ body {
   background-color: var(--clr-neutral-900);
 }
 
+.theater-header-container {
+  margin: 1rem;
+}
 
 .theater-nav-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.theater-nav-wrapper h1 {
+  font-size: xx-large;
 }
 
 .characters-grid {
