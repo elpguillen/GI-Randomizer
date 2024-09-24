@@ -138,6 +138,7 @@ function createElementGrid() {
         elementsContainer.appendChild(elem);
         elem.src = "../../images/" + "element_" + elementList[elemIndex] + ".webp";
         elem.classList.add("element-image");
+        elem.setAttribute('draggable', false);
     }
 }
 
