@@ -1,3 +1,6 @@
+import dataa from './data.json' assert { type: 'json' };
+
+console.log(dataa.character);
 
 // Colors used in site
 const fiveStarBackgroundColor = "#AB6E28";
