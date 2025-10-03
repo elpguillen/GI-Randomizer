@@ -1,0 +1,2 @@
+1. Update list of characters
+2. Remove json data from main.js and add to seperate file.
